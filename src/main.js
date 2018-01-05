@@ -1,7 +1,12 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import Layout from './components/layout.vue';
+import router from './router.js'
+import VueResource from 'vue-resource'
+
+Vue.use(VueResource);
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  router,
+  render: h => h(Layout)
 })
