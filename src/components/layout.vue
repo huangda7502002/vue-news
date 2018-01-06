@@ -24,10 +24,16 @@
     <div class="app-foot">
       <p>2016 fishenal MIT</p>
     </div>
+    <my-dialog></my-dialog>
   </div>
 </template>
 <script>
-
+  import myDialog from './dialog.vue'
+  export default {
+    components:{
+      myDialog
+    }
+  }
 </script>
 <style>
   /* http://meyerweb.com/eric/tools/css/reset/

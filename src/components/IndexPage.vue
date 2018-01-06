@@ -17,13 +17,14 @@
       <div class="index-left-block">
         <h2>最新消息</h2>
         <ul>
-          <li v-for="item in newsList">
+          <li v-for="item in newsList" class="new-item">
             <a :href="item.url">{{item.name}}</a>
           </li>
         </ul>
       </div>
     </div>
     <div class="index-right">
+      <slide-show :slides="slides" @onchange="change"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item,index) in boardList" :class="[{'line-last':index%2 != 0},'index-board-'+item.id]">
           <div class="index-board-item-inner">
@@ -40,16 +41,38 @@
 </template>
 
 <script>
+    import slideShow from './slideShow.vue'
+
     export default {
-      created:function(){
-        this.$http.get('getList').then(function(data){
-          console.log(data);
-        }).catch(function(err){
-          console.log(err);
+      created: function () {
+        this.$http.get('getList').then(function (data) {
+        }).catch(function (err) {
         })
       },
       data() {
         return {
+          slides: [
+            {
+              src: require('../assets/slideShow/pic1.jpg'),
+              title: 'xxx1',
+              href: 'detail/analysis'
+            },
+            {
+              src: require('../assets/slideShow/pic2.jpg'),
+              title: 'xxx2',
+              href: 'detail/count'
+            },
+            {
+              src: require('../assets/slideShow/pic3.jpg'),
+              title: 'xxx3',
+              href: 'http://xxx.xxx.com'
+            },
+            {
+              src: require('../assets/slideShow/pic4.jpg'),
+              title: 'xxx4',
+              href: 'detail/forecast'
+            }
+          ],
           productList: {
             pc: {
               title: 'PC产品',
@@ -99,15 +122,15 @@
           },
           newsList: [
             {
-              name: '数据统计',
+              name: '数据统计数据统计数据统计数据统计数据统计数据统计',
               url: 'http://starcraft.com'
             },
             {
-              name: '数据预测',
+              name: '数据预测数据预测数据预测数据预测数据预测数据预测',
               url: 'http://warcraft.com'
             },
             {
-              name: '流量分析',
+              name: '流量分析流量分析流量分析流量分析流量分析流量分析',
               url: 'http://overwatch.com',
               hot: true
             },
@@ -146,6 +169,14 @@
               saleout: false
             }
           ]
+        }
+      },
+      components: {
+        slideShow
+      },
+      methods:{
+        change(index){
+          console.log(index);
         }
       }
     }
@@ -236,5 +267,12 @@
   }
   .index-board-button{
     margin-top:20px;
+  }
+  .new-item{
+    display:inline-block;
+    width:230px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
 </style>
