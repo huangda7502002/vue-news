@@ -23,7 +23,8 @@
         data() {
             return {
               nowIndex:0,
-              isShow:true
+              isShow:true,
+              first:true
             }
         },
         props:{
