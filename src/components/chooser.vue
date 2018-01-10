@@ -29,14 +29,15 @@
       },
       methods: {
         chosenSelection (index) {
-          this.nowIndex = index
+          this.nowIndex = index;
+          console.log('bbb');
           this.$emit('on-change', this.selections[index])
         }
       }
     }
 </script>
 
-<style>
+<style scoped>
   .chooser-component {
     position: relative;
     display: inline-block;

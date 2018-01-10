@@ -6,6 +6,7 @@ import count from './components/detail/count.vue';
 import forecast from './components/detail/forecast.vue';
 import publish from './components/detail/publish.vue';
 import analysis from './components/detail/analysis.vue';
+import orderListPage from './components/orderListPage.vue';
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -14,6 +15,10 @@ export default new VueRouter({
     {
       path:'/',
       component:IndexPage
+    },
+    {
+      path:'/orderList',
+      component:orderListPage
     },
     {
       path:'/detail',

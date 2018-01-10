@@ -94,7 +94,13 @@
           <td>{{ price }}</td>
         </tr>
       </table>
+      <h3 class="buy-dialog-title">请选择银行</h3>
+      <bank-chooser @on-change="onChangeBanks"></bank-chooser>
+      <div class="button buy-dialog-btn" @click="confirmBuy">
+        确认购买
+      </div>
     </myDialog>
+    <check-order @on-close-check-dialog="hideCheckOrder" :is-show-check-dialog="isShowCheckOrder"></check-order>
   </div>
 </template>
 
@@ -104,6 +110,8 @@
   import VChooser from '../chooser.vue';
   import VMulChooser from '../multiplyChooser.vue';
   import dialog from '../dialog.vue';
+  import bankChooser from '../bankChooser.vue';
+  import CheckOrder from '../checkOrder.vue';
     export default {
       data() {
         return {
@@ -156,7 +164,9 @@
               value: 2
             }
           ],
-          isShowPayDialog:false
+          isShowPayDialog:false,
+          bankId : null,
+          isShowCheckOrder:false
         }
       },
       methods:{
@@ -172,8 +182,17 @@
         },
         showPayDialog(){
           this.isShowPayDialog = true;
+        },
+        onChangeBanks(bankObj){
+          this.bankId = bankObj.id;
+        },
+        confirmBuy(){
+          this.isShowCheckOrder = true;
+          this.isShowPayDialog = false;
+        },
+        hideCheckOrder(){
+          this.isShowCheckOrder = false;
         }
-
       },
       mounted(){
         this.buyNum = 1;
@@ -182,7 +201,7 @@
         this.period = this.periodList[0];
       },
       components:{
-        VSelection,VCounter,VChooser,VMulChooser,myDialog:dialog
+        VSelection,VCounter,VChooser,VMulChooser,myDialog:dialog,bankChooser,CheckOrder
       }
     }
 </script>
